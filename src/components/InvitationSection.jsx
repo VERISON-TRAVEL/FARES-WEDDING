@@ -61,7 +61,7 @@ const InvitationSection = () => (
 
           <p>
             بكل معاني المحبة والامتنان، وبقلوبٍ يملؤها الفرح والسرور،<br/>
-            يتشرف <span className="names-highlight">سناء</span> و <span className="names-highlight">فارس</span> بدعوتكم الكريمة لتشريفهما بحضور حفل زفافهما، ومشاركتهما أجمل لحظات العمر، احتفاءً ببداية رحلةٍ جديدة عنوانها المودة والوفاء.
+           يتقدم <span className="names-highlight">سناء</span> و <span className="names-highlight">فارس</span> بدعوتكم لحضور حفل زفافهما، ومشاركتهما أجمل لحظات العمر، احتفاءً ببداية رحلةٍ جديدة عنوانها المودة والوفاء.
           </p>
 
           <br />
