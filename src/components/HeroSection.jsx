@@ -69,10 +69,10 @@ const HeroSection = () => (
       <p className="bismillah" lang="ar" dir="rtl">بسم الله الرحمن الرحيم</p>
 
       {/* Wreath with names inside */}
-      <div className="hero-wreath-wrapper" aria-label="فيفي وفارس">
+      <div className="hero-wreath-wrapper" aria-label="سناء وفارس">
         <WreathSVG />
         <h1 className="couple-names" lang="ar" dir="rtl">
-          فيفي <span className="ampersand">&amp;</span> فارس
+          سناء <span className="ampersand">&amp;</span> فارس
         </h1>
       </div>
 
@@ -80,12 +80,12 @@ const HeroSection = () => (
       <div className="hero-divider" aria-hidden="true" />
 
       {/* Subtitles */}
-      <p className="hero-subtitle" lang="ar" dir="rtl">حفل الزفاف</p>
+      <p className="hero-subtitle" lang="ar" dir="rtl">دعوة حفل زواج</p>
       <p className="hero-subtitle-en">Wedding Celebration</p>
 
       {/* Date */}
       <div className="hero-date-badge" lang="ar" dir="rtl">
-        الجمعة ✦ 31 يوليو 2026
+        الجمعة ✦ 31 جويلية 2026
       </div>
     </div>
 

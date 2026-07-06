@@ -4,7 +4,7 @@
    ============================================================ */
 
 /* ── FONTS ── */
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Tajawal:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Tajawal:wght@300;400;700&family=Great+Vibes&display=swap');
 
 /* ── COLOR TOKENS ── */
 :root {
@@ -285,6 +285,11 @@ body {
   margin-bottom: 48px;
   opacity: 0;
   animation: fadeInUp 0.8s ease forwards 0.9s;
+  text-shadow: 0 4px 30px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.9);
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline-block;
 }
 
 /* Gold SVG Wreath */
@@ -320,6 +325,7 @@ body {
   letter-spacing: 2px;
   position: relative;
   z-index: 1;
+  text-shadow: 0 4px 30px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.9);
 }
 .couple-names .ampersand {
   font-family: var(--font-display);
@@ -354,6 +360,7 @@ body {
   margin-bottom: 8px;
   opacity: 0;
   animation: fadeInUp 0.8s ease forwards 2.2s;
+  text-shadow: 0 4px 20px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.9);
 }
 .hero-subtitle-en {
   font-family: var(--font-display);
@@ -365,6 +372,7 @@ body {
   opacity: 0;
   animation: fadeInUp 0.8s ease forwards 2.4s;
   margin-bottom: 40px;
+  text-shadow: 0 4px 20px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.9);
 }
 
 .hero-date-badge {
@@ -496,18 +504,23 @@ body {
 .bismillah-line {
   display: block;
   font-size: clamp(1.2rem, 3vw, 1.6rem);
-  color: var(--gold-light);
+  color: var(--cream);
   margin-bottom: 24px;
   letter-spacing: 2px;
+  border-bottom: 2px solid #1a1a1a;
+  padding-bottom: 10px;
 }
 .names-highlight {
-  background: var(--gold-grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: shimmer 4s linear infinite;
+  color: #C8860A;
   font-weight: 700;
+  -webkit-text-fill-color: #C8860A;
+  text-shadow: none;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.25em;
+  vertical-align: baseline;
 }
 .date-highlight {
   color: var(--gold-light);
@@ -545,57 +558,51 @@ body {
   gap: 0;
   max-width: 900px;
   margin: 0 auto;
-  direction: rtl;
-}
-
-.countdown-unit {
-  flex: 1;
-  padding: 40px 20px;
-  /* Light card */
+  direction: ltr;
   background: var(--bg-light);
   border: 1px solid var(--gold);
   outline: 1px solid rgba(200, 149, 108, 0.4);
   outline-offset: 6px;
-  margin: 8px;
+  padding: 40px 10px;
   position: relative;
   transition: box-shadow 0.3s ease;
+  flex-wrap: nowrap;
 }
-.countdown-unit:hover {
+.countdown-grid:hover {
   box-shadow: 0 0 30px rgba(201, 168, 76, 0.12);
 }
 
-/* Corner ornament per unit */
-.countdown-unit::before,
-.countdown-unit::after {
+.countdown-unit {
+  flex: 1;
+  padding: 0 5px;
+  position: relative;
+  text-align: center;
+}
+
+/* Corner ornament per grid (moved from unit) */
+.countdown-grid::before,
+.countdown-grid::after {
   content: '◆';
   position: absolute;
   font-size: 8px;
   color: var(--gold);
   opacity: 0.6;
 }
-.countdown-unit::before { top: 8px; left: 8px; }
-.countdown-unit::after  { bottom: 8px; right: 8px; }
+.countdown-grid::before { top: 8px; left: 8px; }
+.countdown-grid::after  { bottom: 8px; right: 8px; }
 
 .countdown-number {
   display: block;
   font-family: var(--font-display);
   font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 300;
-  background: var(--gold-grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: shimmer 4s linear infinite, numberGlow 3s ease-in-out infinite alternate;
+  color: #8B6010;
+  -webkit-text-fill-color: #8B6010;
   line-height: 1;
-}
-@keyframes numberGlow {
-  0%   { filter: drop-shadow(0 0 4px rgba(201, 168, 76, 0.2)); }
-  100% { filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.5)); }
 }
 /* Flip animation on update */
 .countdown-number.flip {
-  animation: numFlip 0.3s ease, shimmer 4s linear infinite;
+  animation: numFlip 0.3s ease;
 }
 @keyframes numFlip {
   0%   { transform: rotateX(0deg); }
@@ -720,12 +727,7 @@ body {
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 300;
-  background: var(--gold-grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: shimmer 4s linear infinite;
+  color: #8B6010;
   letter-spacing: 2px;
   margin-bottom: 24px;
   display: block;
@@ -981,14 +983,19 @@ body {
   .invitation-section { padding: 60px 16px; }
   .invitation-card { padding: 36px 20px; outline-offset: 5px; max-width: 100%; }
 
-  .countdown-section { padding: 60px 16px; }
+  .countdown-section { padding: 60px 8px; }
   .countdown-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: 0;
     max-width: 100%;
+    padding: 24px 4px;
+    overflow: visible;
   }
-  .countdown-unit { padding: 24px 12px; margin: 4px; }
+  .countdown-unit { padding: 0 2px; flex: 1; }
+  .countdown-number { font-size: clamp(1.6rem, 6vw, 3rem); }
+  .countdown-label { font-size: clamp(0.55rem, 2vw, 0.75rem); letter-spacing: 0.5px; }
   .countdown-separator { display: none; }
 
   .gallery-section { padding: 60px 12px; }

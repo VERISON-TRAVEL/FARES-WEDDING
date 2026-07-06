@@ -34,7 +34,7 @@ const InvitationSection = () => (
     <FadeInSection>
       <div className="invitation-section-header">
         <p className="section-label">Invitation</p>
-        <h2 className="section-heading" lang="ar" dir="rtl">الدعوة الكريمة</h2>
+        <h2 className="section-heading" lang="ar" dir="rtl">الدعوة</h2>
         <GoldDivider icon="◆" />
       </div>
 
@@ -54,27 +54,27 @@ const InvitationSection = () => (
           <GoldDivider icon="◆" />
 
           <p>
-            يسرنا دعوتكم لحضور حفل زفاف ابنتنا الغالية{' '}
-            <span className="names-highlight">فيفي</span>{' '}
-            مع السيد{' '}
-            <span className="names-highlight">فارس</span>،
-            ومشاركتنا فرحتنا بهذه المناسبة السعيدة.
+            ﴿وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً﴾
           </p>
 
           <br />
 
           <p>
-            وذلك يوم{' '}
-            <span className="date-highlight">الجمعة 31 يوليو 2026</span>.
+            بكل معاني المحبة والامتنان، وبقلوبٍ يملؤها الفرح والسرور،<br/>
+            يتشرف <span className="names-highlight">سناء</span> و <span className="names-highlight">فارس</span> بدعوتكم الكريمة لتشريفهما بحضور حفل زفافهما، ومشاركتهما أجمل لحظات العمر، احتفاءً ببداية رحلةٍ جديدة عنوانها المودة والوفاء.
           </p>
 
           <br />
 
-          <p>حضوركم يشرفنا ويزيد فرحتنا سعادة.</p>
+          <p>
+            إن حضوركم شرفٌ لنا، وفرحتنا تكتمل بوجودكم، لتبقى هذه المناسبة ذكرى جميلة تزداد رونقًا بمشاركتكم.
+          </p>
 
           <br />
 
-          <p>أهلاً وسهلاً بكم.</p>
+          <p>
+            نسأل الله أن يديم الأفراح، ويجمعنا دائمًا على الخير والمحبة.
+          </p>
         </div>
 
         <GoldDivider icon="◆" />

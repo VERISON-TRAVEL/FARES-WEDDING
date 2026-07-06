@@ -22,11 +22,6 @@ const CountdownUnit = ({ value, label, prev }) => {
       <div className="unit-divider" aria-hidden="true" />
       <span className="countdown-label" lang="ar" dir="rtl">{label}</span>
 
-      {/* Corner ornaments */}
-      <span style={{ position:'absolute', top:8, left:8 }}><CornerOrnament /></span>
-      <span style={{ position:'absolute', top:8, right:8, transform:'scaleX(-1)' }}><CornerOrnament /></span>
-      <span style={{ position:'absolute', bottom:8, left:8, transform:'scaleY(-1)' }}><CornerOrnament /></span>
-      <span style={{ position:'absolute', bottom:8, right:8, transform:'scale(-1,-1)' }}><CornerOrnament /></span>
     </div>
   )
 }
@@ -87,6 +82,12 @@ const CountdownSection = () => {
           </p>
         ) : (
           <div className="countdown-grid" role="timer" aria-label="العد التنازلي">
+            {/* Corner ornaments */}
+            <span style={{ position:'absolute', top:8, left:8 }}><CornerOrnament /></span>
+            <span style={{ position:'absolute', top:8, right:8, transform:'scaleX(-1)' }}><CornerOrnament /></span>
+            <span style={{ position:'absolute', bottom:8, left:8, transform:'scaleY(-1)' }}><CornerOrnament /></span>
+            <span style={{ position:'absolute', bottom:8, right:8, transform:'scale(-1,-1)' }}><CornerOrnament /></span>
+            
             {units.map((u) => (
               <CountdownUnit
                 key={u.en}
