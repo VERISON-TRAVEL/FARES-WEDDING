@@ -123,7 +123,7 @@ const App = () => {
         {/* Sticky Download Button */}
         <a
           href="/invitation.png"
-          download="invitation-fares-sana.png"
+          download="invitation-sana-fares.png"
           className="sticky-download"
           aria-label="تحميل الدعوة"
           onClick={handleRipple}
