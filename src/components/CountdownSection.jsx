@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import FadeInSection from './FadeInSection'
+import BaroqueCorner from './BaroqueCorner'
 
 const WEDDING_DATE = new Date('2026-07-31T00:00:00+01:00')
 const pad = (n) => String(n).padStart(2, '0')
@@ -68,7 +69,12 @@ const CountdownSection = () => {
   }
 
   return (
-    <section className="countdown-section" id="countdown" aria-label="العد التنازلي للحفل">
+    <section className="countdown-section" id="countdown" aria-label="العد التنازلي">
+      {/* Baroque corner decorations */}
+      <BaroqueCorner position="tl" />
+      <BaroqueCorner position="tr" />
+      <BaroqueCorner position="bl" />
+      <BaroqueCorner position="br" />
       <FadeInSection>
         <div className="countdown-section-header">
           <p className="section-label">Countdown</p>

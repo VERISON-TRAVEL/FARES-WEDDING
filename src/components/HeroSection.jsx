@@ -1,4 +1,5 @@
 import React from 'react'
+import BaroqueCorner from './BaroqueCorner'
 
 // Ornate gold SVG wreath for hero
 const WreathSVG = () => (
@@ -57,11 +58,16 @@ const WreathSVG = () => (
 )
 
 const HeroSection = () => (
-  <section className="hero" id="hero">
-    {/* Blurred rose background */}
-    <div className="hero-rose-bg" aria-hidden="true" />
+    <section className="hero" id="hero" aria-label="مقدمة">
+      <div className="hero-rose-bg" aria-hidden="true" />
+      
+      {/* Baroque corners for Hero */}
+      <BaroqueCorner position="tl" />
+      <BaroqueCorner position="tr" />
+      <BaroqueCorner position="bl" />
+      <BaroqueCorner position="br" />
 
-    <div className="hero-content">
+      <div className="hero-content">
       {/* Animated gold line */}
       <div className="hero-line-top" aria-hidden="true" />
 

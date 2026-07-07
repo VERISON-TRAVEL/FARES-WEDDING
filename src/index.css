@@ -655,49 +655,70 @@ body {
   padding: 120px 24px;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 .gallery-section-header {
   text-align: center;
   margin-bottom: 80px;
 }
-
-.gallery-alt-list {
-  max-width: 900px;
+/* Infinite Carousel Styles */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  gap: 60px;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
 }
-.gallery-alt-row {
-  display: flex;
-  width: 100%;
-}
-.gallery-alt-row--left  { justify-content: flex-start; }
-.gallery-alt-row--right { justify-content: flex-end; }
-.gallery-alt-item {
-  width: 70%;
+.carousel-stage {
   position: relative;
-  cursor: pointer;
-  border: 1px solid rgba(201, 168, 76, 0.3);
-  outline: 1px solid rgba(201, 168, 76, 0.1);
-  outline-offset: 8px;
-  overflow: hidden;
-  transition: transform 0.5s var(--transition), box-shadow 0.5s ease;
-}
-.gallery-alt-item:hover {
-  transform: scale(1.025);
-  box-shadow: 0 20px 60px rgba(201, 168, 76, 0.15);
-}
-.gallery-alt-img {
   width: 100%;
-  height: auto;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+.carousel-slide {
+  position: absolute;
+  width: 320px;
+  height: 440px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  /* The blur and positioning is managed via inline styles in React */
+}
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  filter: sepia(0.1) brightness(0.95);
-  transition: filter 0.5s ease;
 }
-.gallery-alt-item:hover .gallery-alt-img {
-  filter: sepia(0) brightness(1);
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(26, 11, 2, 0.6);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.6rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
 }
+.carousel-btn:hover { background: var(--gold); color: #1a0b02; }
+.carousel-btn--prev { left: 16px; }
+.carousel-btn--next { right: 16px; }
 
 /* ============================================================
    VENUE SECTION â€” EDITORIAL
@@ -1017,4 +1038,785 @@ body {
     bottom: 20px;
     max-width: calc(100vw - 40px);
   }
+}
+
+/* ============================================================
+   BAROQUE GOLD SECTION CORNER DECORATIONS
+   ============================================================ */
+.baroque-corners { position: relative; }
+
+.baroque-corner {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.75;
+}
+.baroque-corner svg { width: 100%; height: 100%; }
+.baroque-corner--tl { top: 8px;  left:  8px; }
+.baroque-corner--tr { top: 8px;  right: 8px;  transform: scaleX(-1); }
+.baroque-corner--bl { bottom: 8px; left:  8px;  transform: scaleY(-1); }
+.baroque-corner--br { bottom: 8px; right: 8px;  transform: scale(-1,-1); }
+
+/* ============================================================
+   LETTER INTRO PRE-OPENING PAGE
+   ============================================================ */
+.letter-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: linear-gradient(135deg, #f5e4e0 0%, #e8d0c6 40%, #f0d9cc 70%, #e8cdc6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: hidden;
+  transition: opacity 0.9s ease;
+}
+.letter-intro--fading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.letter-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.letter-particle {
+  position: absolute;
+  bottom: -4px;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #c9a084;
+  box-shadow: 0 0 4px #c9a084;
+  opacity: 0;
+  animation-name: lParticleUp;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes lParticleUp {
+  0%   { transform: translateY(0);      opacity: 0; }
+  10%  { opacity: 0.9; }
+  90%  { opacity: 0.9; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+.image-envelope {
+  position: relative;
+  width: min(800px, 95vw);
+  aspect-ratio: 3 / 2;
+  background-image: url('/envelope.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  border-radius: 8px;
+  animation: letterFloatIn 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@keyframes letterFloatIn {
+  from { opacity: 0; transform: translateY(36px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+.letter-bismillah {
+  font-family: var(--font-ar);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: #8B0000;
+  letter-spacing: 1px;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(255,255,255,0.6);
+}
+
+.invisible-stamp-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(100px, 20vw, 150px);
+  height: clamp(100px, 20vw, 150px);
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  outline: none;
+}
+.invisible-stamp-btn:hover .invisible-stamp-ripple {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.invisible-stamp-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+
+.invisible-stamp-btn--pressed .invisible-stamp-ripple {
+  animation: stampBreak 0.6s ease-out forwards;
+}
+
+@keyframes stampBreak {
+  0%   { transform: scale(1);   opacity: 1; }
+  50%  { transform: scale(1.5); opacity: 0.8; box-shadow: 0 0 40px rgba(255,0,0,0.4); }
+  100% { transform: scale(2);   opacity: 0; }
+}
+
+/* ============================================================
+   CALENDAR SECTION
+   ============================================================ */
+.calendar-section {
+  padding: 100px 24px;
+  position: relative;
+  z-index: 2;
+}
+.calendar-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(200, 149, 108, 0.3);
+  border-radius: 12px;
+  padding: 30px 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+.calendar-day-header {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.calendar-cell {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+.calendar-cell.highlighted-date {
+  background: var(--gold);
+  color: #1a0b02;
+  font-weight: 700;
+  box-shadow: 0 0 15px var(--gold);
+  transform: scale(1.15);
+}
+
+/* ============================================================
+   MOBILE HERO OVERRIDES
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100vh;
+    padding-top: 140px;
+  }
+  .hero-rose-bg {
+    background-position: center center;
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.95), inset 0 0 20px rgba(0,0,0,0.8);
+    filter: brightness(0.9) saturate(0.8) sepia(0.2);
+  }
+  .hero-rose-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.65) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .carousel-stage { height: clamp(200px, 62vw, 340px); }
+  .carousel-slide { width: clamp(160px, 58vw, 280px); height: clamp(180px, 62vw, 300px); }
+  .carousel-btn { width: 36px; height: 36px; font-size: 1.3rem; }
+  .carousel-btn--prev { left: 6px; }
+  .carousel-btn--next { right: 6px; }
+}
+
+/* ============================================================
+   CAROUSEL SLIDE POSITION CLASSES
+   ============================================================ */
+.carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.carousel-slide--center {
+  transform: translateX(0) scale(1);
+  z-index: 5;
+  filter: blur(0px) brightness(1);
+  cursor: pointer;
+}
+.carousel-slide--side {
+  z-index: 3;
+  filter: blur(3px) brightness(0.75);
+  cursor: pointer;
+}
+.carousel-slide--right {
+  transform: translateX(calc(100% + 20px)) scale(0.82);
+}
+/* left is the opposite of right via offset logic */
+.carousel-slide:not(.carousel-slide--right):not(.carousel-slide--center).carousel-slide--side {
+  transform: translateX(calc(-100% - 20px)) scale(0.82);
+}
+.carousel-slide--hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.carousel-zoom-hint {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.carousel-slide--center:hover .carousel-zoom-hint { opacity: 1; }
+
+/* Carousel dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+}
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+.carousel-dot--active {
+  background: var(--gold);
+  transform: scale(1.3);
+}
+
+/* ============================================================
+   CALENDAR CARD — COMPACT, ROUNDED, BAROQUE
+   ============================================================ */
+.calendar-section {
+  padding: 80px 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.calendar-card {
+  position: relative;
+  max-width: 320px;
+  margin: 0 auto;
+  background: var(--bg-light);
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  border-radius: 20px;
+  padding: 48px 20px 28px;
+  box-shadow:
+    0 8px 32px rgba(200, 149, 108, 0.15),
+    0 0 0 1px rgba(201, 168, 76, 0.1);
+  overflow: hidden;
+}
+
+/* Baroque SVG corner flourishes */
+.cal-corner {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+}
+.cal-corner--tl { top: 4px;  left:  4px; }
+.cal-corner--tr { top: 4px;  right: 4px; }
+.cal-corner--bl { bottom: 4px; left:  4px; }
+.cal-corner--br { bottom: 4px; right: 4px; }
+
+/* Month header */
+.calendar-month-bar {
+  text-align: center;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+  padding-bottom: 12px;
+}
+.calendar-month-text {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 6px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+/* Grid */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  text-align: center;
+}
+.calendar-day-header {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 0 6px;
+}
+.calendar-cell {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+.calendar-cell.highlighted-date {
+  background: var(--gold);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.6);
+  transform: scale(1.2);
+  border-radius: 50%;
+}
+.cal-heart {
+  display: block;
+  font-size: 0.45rem;
+  margin-top: 1px;
+  line-height: 1;
+}
+
+/* Footer note */
+.calendar-footer-note {
+  text-align: center;
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(201, 168, 76, 0.25);
+  font-family: var(--font-ar);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   MOBILE HERO — full image, no crop
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100svh;
+    padding: 80px 16px 60px;
+  }
+  .hero-rose-bg {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-color: #FFF9F6;
+    filter: brightness(1) saturate(1) sepia(0) !important;
+  }
+  .hero-rose-bg::after {
+    background: linear-gradient(
+      180deg,
+      rgba(255,249,246,0.3) 0%,
+      rgba(255,249,246,0.05) 40%,
+      rgba(255,249,246,0.3) 100%
+    ) !important;
+  }
+}
+
+/* ============================================================
+   HERO TEXT — ENHANCED VISIBILITY
+   ============================================================ */
+
+/* Semi-transparent backdrop behind the content block */
+.hero-content {
+  background: rgba(255, 249, 246, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 16px;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  padding: 40px 48px;
+}
+
+/* Stronger gold shimmer on names */
+.couple-names {
+  font-size: clamp(3.4rem, 11vw, 8rem) !important;
+  text-shadow:
+    0 2px 4px rgba(0,0,0,0.25),
+    0 0 20px rgba(196, 144, 32, 0.5),
+    0 0 40px rgba(255,255,255,0.8) !important;
+}
+
+/* Bismillah line — stronger contrast */
+.bismillah {
+  color: #8B5E00 !important;
+  text-shadow:
+    0 1px 3px rgba(0,0,0,0.2),
+    0 0 12px rgba(255,255,255,0.9),
+    0 0 24px rgba(255,255,255,0.7) !important;
+  font-size: clamp(1.1rem, 3vw, 1.6rem) !important;
+}
+
+/* Date badge — darker text */
+.hero-date-badge {
+  color: #5C2E00 !important;
+  font-weight: 600 !important;
+  background: rgba(255,249,246,0.7);
+  border-radius: 8px;
+  padding: 16px 48px !important;
+}
+
+/* Subtitle lines */
+.hero-subtitle {
+  text-shadow:
+    0 2px 6px rgba(0,0,0,0.2),
+    0 0 20px rgba(255,255,255,0.85) !important;
+  font-size: clamp(2rem, 5vw, 2.8rem) !important;
+}
+.hero-subtitle-en {
+  text-shadow:
+    0 1px 4px rgba(0,0,0,0.2),
+    0 0 16px rgba(255,255,255,0.85) !important;
+  color: #8B5E00 !important;
+}
+
+/* Mobile — ensure text stays readable */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 28px 24px;
+    background: rgba(255, 249, 246, 0.7);
+  }
+  .couple-names {
+    font-size: clamp(2.8rem, 13vw, 5rem) !important;
+  }
+}
+
+/* ============================================================
+   HERO IMAGE — ENHANCED VISIBILITY
+   ============================================================ */
+
+/* Remove the heavy wash filter and gradient overlay to let the image shine */
+.hero-rose-bg {
+  filter: none !important;
+}
+
+.hero-rose-bg::after {
+  /* Much lighter gradient, just enough to blend the bottom edge */
+  background: linear-gradient(180deg,
+    rgba(255, 249, 246, 0.1) 0%,
+    rgba(252, 238, 232, 0.0) 50%,
+    rgba(255, 249, 246, 0.4) 100%
+  ) !important;
+}
+
+/* Reduce the opacity of the text backdrop so it doesn't block the image too much */
+.hero-content {
+  background: rgba(255, 249, 246, 0.15) !important;
+  backdrop-filter: blur(3px) !important;
+  -webkit-backdrop-filter: blur(3px) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    background: rgba(255, 249, 246, 0.3) !important;
+  }
+}
+
+/* ============================================================
+   HERO IMAGE — MAXIMUM VISIBILITY (RAW IMAGE)
+   ============================================================ */
+
+/* Nuke ALL gradient overlays on the hero background */
+.hero-rose-bg::after,
+.hero-rose-bg::before {
+  display: none !important;
+  background: transparent !important;
+}
+
+/* Nuke the frosted glass box entirely */
+.hero-content {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Ensure mobile also has absolutely no overlays */
+@media (max-width: 768px) {
+  .hero-rose-bg::after,
+  .hero-rose-bg::before {
+    display: none !important;
+  }
+  .hero-content {
+    background: transparent !important;
+    padding: 0 !important;
+  }
+}
+
+/* ============================================================
+   HERO TEXT — MAXIMUM CONTRAST OVERRIDES
+   ============================================================ */
+
+/* Make Bismillah text extremely visible */
+.bismillah {
+  color: #3B1A14 !important;
+  font-weight: 700 !important;
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 1),
+    0 0 10px rgba(255, 255, 255, 1),
+    0 0 20px rgba(255, 255, 255, 0.9),
+    0 4px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Make 'Wedding Celebration' text extremely visible */
+.hero-subtitle-en {
+  color: #3B1A14 !important;
+  font-weight: 800 !important;
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 1),
+    0 0 10px rgba(255, 255, 255, 1),
+    0 0 20px rgba(255, 255, 255, 0.9),
+    0 4px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ============================================================
+   COUNTDOWN — MAXIMUM VISIBILITY
+   ============================================================ */
+.countdown-number {
+  font-weight: 700 !important;
+  color: #5C2E00 !important;
+  -webkit-text-fill-color: #5C2E00 !important;
+  text-shadow: 0 4px 12px rgba(200, 149, 108, 0.4) !important;
+}
+
+@media (max-width: 768px) {
+  .countdown-number {
+    font-size: clamp(2.4rem, 8vw, 4rem) !important;
+  }
+}
+
+/* ============================================================
+   COUNTDOWN NUMBERS — ENHANCED VISIBILITY
+   ============================================================ */
+
+.countdown-number {
+  color: #3B1A14 !important;
+  font-weight: 800 !important;
+  -webkit-text-fill-color: #3B1A14 !important;
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.1),
+    0 0 10px rgba(200, 149, 108, 0.4),
+    0 0 20px rgba(255, 255, 255, 0.8) !important;
+}
+
+@media (max-width: 768px) {
+  .countdown-number {
+    font-weight: 800 !important;
+  }
+}
+
+/* ============================================================
+   CALENDAR — SMALLER SIZE + HIGH VISIBILITY NUMBERS
+   ============================================================ */
+
+.calendar-card {
+  max-width: 260px !important;
+  padding: 36px 14px 20px !important;
+}
+
+.calendar-grid {
+  gap: 2px !important;
+}
+
+.calendar-day-header {
+  font-size: 0.62rem !important;
+  font-weight: 800 !important;
+  color: #8B5E00 !important;
+  letter-spacing: 0 !important;
+  padding: 3px 0 5px !important;
+}
+
+.calendar-cell {
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  color: #3B1A14 !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+.calendar-cell.highlighted-date {
+  font-size: 0.75rem !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  background: #C9A84C !important;
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.7) !important;
+  transform: scale(1.25) !important;
+}
+
+.calendar-month-text {
+  font-size: 0.75rem !important;
+  letter-spacing: 4px !important;
+}
+
+.calendar-footer-note {
+  font-size: 0.72rem !important;
+  margin-top: 14px !important;
+  padding-top: 10px !important;
+}
+
+/* ============================================================
+   CALENDAR — COMPACT CARD, LARGE BOLD NUMBERS
+   ============================================================ */
+
+.calendar-card {
+  max-width: 240px !important;
+  padding: 28px 10px 16px !important;
+  border-radius: 16px !important;
+}
+
+.calendar-month-bar {
+  margin-bottom: 12px !important;
+  padding-bottom: 8px !important;
+}
+
+.calendar-month-text {
+  font-size: 0.65rem !important;
+  letter-spacing: 5px !important;
+  font-weight: 700 !important;
+  color: #8B5E00 !important;
+}
+
+.calendar-grid {
+  gap: 1px !important;
+}
+
+.calendar-day-header {
+  font-size: 0.68rem !important;
+  font-weight: 900 !important;
+  color: #8B5E00 !important;
+  padding: 2px 0 5px !important;
+  letter-spacing: 0 !important;
+}
+
+.calendar-cell {
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  color: #2C0D0D !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 50% !important;
+}
+
+.calendar-cell.highlighted-date {
+  font-size: 0.85rem !important;
+  font-weight: 900 !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #C9A84C, #E8C97A) !important;
+  box-shadow: 0 0 16px rgba(201, 168, 76, 0.9) !important;
+  transform: scale(1.3) !important;
+}
+
+.calendar-footer-note {
+  font-size: 0.68rem !important;
+  margin-top: 12px !important;
+  padding-top: 8px !important;
+  color: #8B5E00 !important;
+  font-weight: 600 !important;
+}
+
+.cal-heart {
+  font-size: 0.4rem !important;
+}
+
+/* Calendar baroque corners adjusted for smaller card */
+.cal-corner {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+/* ============================================================
+   CALENDAR — WIDER THAN TALL (landscape proportions)
+   ============================================================ */
+
+.calendar-card {
+  max-width: 360px !important;
+  width: 100% !important;
+  padding: 24px 20px 16px !important;
+  border-radius: 14px !important;
+}
+
+.calendar-grid {
+  gap: 3px 4px !important;
+}
+
+.calendar-cell {
+  aspect-ratio: unset !important;
+  height: 28px !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  color: #2C0D0D !important;
+  border-radius: 4px !important;
+}
+
+.calendar-day-header {
+  height: 22px !important;
+  font-size: 0.63rem !important;
+  font-weight: 900 !important;
+  padding: 2px 0 4px !important;
+}
+
+.calendar-cell.highlighted-date {
+  height: 28px !important;
+  font-size: 0.82rem !important;
+  font-weight: 900 !important;
+  transform: scale(1.15) !important;
+  border-radius: 4px !important;
+}
+
+.calendar-month-bar {
+  margin-bottom: 10px !important;
+  padding-bottom: 8px !important;
+}
+
+.calendar-footer-note {
+  margin-top: 10px !important;
+  padding-top: 8px !important;
+}
+
+/* Corners — proportionally adjusted for wider card */
+.cal-corner {
+  width: 36px !important;
+  height: 36px !important;
 }
