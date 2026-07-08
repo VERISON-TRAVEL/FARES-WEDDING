@@ -30,11 +30,10 @@ const App = () => {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Page loader — only start once the intro is gone
+  // Page loader — mark as loaded instantly once the intro is gone
   useEffect(() => {
     if (showIntro) return
-    const timer = setTimeout(() => setLoaded(true), 2200)
-    return () => clearTimeout(timer)
+    setLoaded(true)
   }, [showIntro])
 
   const handleIntroEnter = () => {

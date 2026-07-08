@@ -68,11 +68,11 @@ const HeroSection = () => (
       <BaroqueCorner position="br" />
 
       <div className="hero-content">
+      {/* Bismillah — above the gold decoration line */}
+      <p className="bismillah" lang="ar" dir="rtl">بسم الله الرحمن الرحيم</p>
+
       {/* Animated gold line */}
       <div className="hero-line-top" aria-hidden="true" />
-
-      {/* Bismillah */}
-      <p className="bismillah" lang="ar" dir="rtl">بسم الله الرحمن الرحيم</p>
 
       {/* Wreath with names inside */}
       <div className="hero-wreath-wrapper" aria-label="سناء وفارس">

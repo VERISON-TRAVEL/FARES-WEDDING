@@ -4,26 +4,41 @@ import BaroqueCorner from './BaroqueCorner'
 /**
  * LetterIntro — Baroque square decorated letter with red wax stamp.
  * The stamp is both decoration and the "enter" button.
- * On click: stamp pulses → letter fades out → main page fades in.
+ * On click: stamp pulses → envelope zooms → main page appears.
  */
 
-
 const LetterIntro = ({ onEnter }) => {
-  const [phase, setPhase] = useState('visible') // visible | stamping | fading
+  const [phase, setPhase] = useState('visible') // visible | stamping | zooming
+  const envelopeRef = useRef(null)
 
-  // Accept a ref to the hidden music iframe so we can start it the INSTANT the stamp is clicked
+  // Play the real envelope-open sound
+  const playEnvelopeSound = () => {
+    try {
+      const audio = new Audio('/envelope-open.mp3')
+      audio.volume = 0.8
+      audio.play().catch(() => {})
+    } catch (_) {}
+  }
+
   const handleStampClick = () => {
     if (phase !== 'visible') return
-    // 1. Trigger music immediately (before any React state update)
+    setPhase('stamping')
+    playEnvelopeSound()
+    // Trigger music immediately
     if (onEnter.musicRef && onEnter.musicRef.current) {
       onEnter.musicRef.current.src = onEnter.musicSrc
     }
-    // Instant transition — no delays or fade phases
-    onEnter()
+    // Zoom envelope, then reveal main page — total ~800ms
+    setTimeout(() => {
+      setPhase('zooming')
+      setTimeout(() => {
+        onEnter()
+      }, 700)
+    }, 80)
   }
 
   return (
-    <div className={`letter-intro ${phase === 'fading' ? 'letter-intro--fading' : ''}`}>
+    <div className={`letter-intro ${phase === 'zooming' ? 'letter-intro--zooming' : ''}`}>
 
       {/* Global baroque corners on the pink gold background */}
       <BaroqueCorner position="tl" />
@@ -43,20 +58,19 @@ const LetterIntro = ({ onEnter }) => {
       </div>
 
       {/* The Letter Envelope Image */}
-      <div className="letter-card image-envelope">
-        
+      <div ref={envelopeRef} className={`letter-card image-envelope${phase === 'zooming' ? ' envelope--zooming' : ''}`}>
+
         {/* Top Text */}
-        <p className="letter-bismillah" lang="ar" dir="rtl" style={{ marginTop: '40px' }}>
+        <p className="letter-bismillah" lang="ar" dir="rtl" style={{ marginTop: '18px' }}>
           بسم الله الرحمن الرحيم
         </p>
 
-        {/* Invisible button over the stamp (center) */}
+        {/* Gold-glowing stamp button */}
         <button
-          className={`invisible-stamp-btn ${phase === 'stamping' ? 'invisible-stamp-btn--pressed' : ''}`}
+          className={`invisible-stamp-btn stamp-glow${phase === 'stamping' ? ' invisible-stamp-btn--pressed' : ''}`}
           onClick={handleStampClick}
           aria-label="انقر لدخول موقع الزفاف"
         >
-          {/* Optional: Add a subtle ripple/glow on click to simulate "opening" */}
           <div className="invisible-stamp-ripple" />
         </button>
 
